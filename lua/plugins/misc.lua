@@ -18,13 +18,6 @@ local M = {
 		"machakann/vim-sandwich",
 		event = "BufreadPre",
 	},
-	{
-		"nosduco/remote-sshfs.nvim",
-        lazy = false,
-		config = function()
-			require("remote-sshfs").setup({})
-		end,
-	},
 }
 
 return M

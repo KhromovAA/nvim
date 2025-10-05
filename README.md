@@ -5,6 +5,8 @@ It was build with goal of being simple and also meeting my reqirements.
 
 # Installation
 
+Require `Neovim v0.11.4` or newer.
+
 + Execute following command in shell.
 ```bash
 git clone https://github.com/KhromovAA/nvim ~/.config/nvim

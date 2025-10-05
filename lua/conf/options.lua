@@ -35,6 +35,8 @@ for k, v in pairs(options) do
 end
 
 vim.diagnostic.config({
+	virtual_text = false,
+	virtual_lines = { current_line = true },
 	signs = false,
 	underline = true,
 	severity_sort = true,

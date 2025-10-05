@@ -10,28 +10,35 @@ map({ "<F2>", vim.lsp.buf.rename })
 map({ "<F7>", vim.lsp.buf.hover })
 
 --format
-map({ "<leader>f", vim.lsp.buf.format })
+local function format_null_ls()
+    vim.lsp.buf.format({
+        filter = function(client)
+            return client.name == "null-ls"
+        end,
+    })
+end
+map({ "<leader>f", format_null_ls })
 
 --snippets
 for _, mode in ipairs({ "s", "i" }) do
-	map({
-		mode = mode,
-		"<CR>",
-		"vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<CR>'",
-		expr = true,
-	})
-	map({
-		mode = mode,
-		"<Tab>",
-		"vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
-		expr = true,
-	})
-	map({
-		mode = mode,
-		"<S-Tab>",
-		"vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
-		expr = true,
-	})
+    map({
+        mode = mode,
+        "<CR>",
+        "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<CR>'",
+        expr = true,
+    })
+    map({
+        mode = mode,
+        "<Tab>",
+        "vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<Tab>'",
+        expr = true,
+    })
+    map({
+        mode = mode,
+        "<S-Tab>",
+        "vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'",
+        expr = true,
+    })
 end
 
 --buffers
@@ -45,10 +52,10 @@ map({ mode = "i", "jk", "<Esc>" })
 map({ mode = "t", "jk", "<C-\\><C-n>" })
 
 for _, mode in ipairs({ "", "i" }) do
-	map({ mode = mode, "<up>", '<Cmd>echoe "Use k"<CR>', silent = false })
-	map({ mode = mode, "<down>", '<Cmd>echoe "Use j"<CR>', silent = false })
-	map({ mode = mode, "<left>", '<Cmd>echoe "Use h"<CR>', silent = false })
-	map({ mode = mode, "<right>", '<Cmd>echoe "Use l"<CR>', silent = false })
+    map({ mode = mode, "<up>", '<Cmd>echoe "Use k"<CR>', silent = false })
+    map({ mode = mode, "<down>", '<Cmd>echoe "Use j"<CR>', silent = false })
+    map({ mode = mode, "<left>", '<Cmd>echoe "Use h"<CR>', silent = false })
+    map({ mode = mode, "<right>", '<Cmd>echoe "Use l"<CR>', silent = false })
 end
 
 --git

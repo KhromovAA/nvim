@@ -18,7 +18,7 @@ local M = {
 			side = "right",
 		},
 		diagnostics = {
-			enable = false,
+			enable = true,
 			show_on_dirs = false,
 		},
 		trash = {

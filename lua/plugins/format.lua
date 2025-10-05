@@ -1,13 +1,24 @@
 local M = {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		config = function()
 			local null_ls = require("null-ls")
 
+			local clang_format_file = os.getenv("HOME") .. "/.config/nvim/.clang-format"
 			null_ls.setup({
 				sources = {
+					-- Lua
 					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.autopep8,
+					-- Python
+					null_ls.builtins.formatting.yapf,
+					-- C/C++
+					null_ls.builtins.formatting.clang_format.with({
+						extra_args = { "--style=file:" .. clang_format_file },
+					}),
+					-- Nix
+					null_ls.builtins.formatting.nixpkgs_fmt,
+                    -- HTML, CSS, js
+                    null_ls.builtins.formatting.prettierd,
 				},
 			})
 		end,
@@ -17,10 +28,7 @@ local M = {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
-		},
-		opts = {
-			ensure_installed = { "stylua" },
+			"nvimtools/none-ls.nvim",
 		},
 	},
 }
